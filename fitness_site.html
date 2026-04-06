@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FitCore | Train. Grow. Inspire.</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue-deep: #020b18;
+    --blue-dark: #050f1f;
+    --blue-mid: #0a1f3d;
+    --blue-bright: #0d6efd;
+    --blue-glow: #1a8fff;
+    --blue-ice: #4fc3f7;
+    --blue-neon: #00e5ff;
+    --accent-gold: #f5a623;
+    --text-main: #cce4ff;
+    --text-dim: #5a87b8;
+    --text-white: #ffffff;
+    --grid-line: rgba(29, 120, 230, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue-deep);
+    color: var(--text-main);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── SCANLINE ─── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(2, 11, 24, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(29, 142, 255, 0.2);
+  }
+
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--blue-neon);
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px var(--blue-neon);
+  }
+
+  .logo span { color: var(--accent-gold); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+
+  nav ul a:hover {
+    color: var(--blue-neon);
+    text-shadow: 0 0 10px var(--blue-neon);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-orb {
+    position: absolute;
+    right: -5%;
+    top: 10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, rgba(13,110,253,0.06) 40%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero-orb2 {
+    position: absolute;
+    left: -10%;
+    bottom: 0%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13,110,253,0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite reverse;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+  }
+
+  .hero-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 5px;
+    color: var(--blue-neon);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeSlide 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 1.0;
+    color: var(--text-white);
+    animation: fadeSlide 0.9s ease both;
+    animation-delay: 0.15s;
+  }
+
+  .hero h1 .hl {
+    color: var(--blue-neon);
+    text-shadow: 0 0 30px var(--blue-neon);
+  }
+
+  .hero h1 .hl2 { color: var(--accent-gold); }
+
+  .hero-sub {
+    max-width: 550px;
+    margin-top: 1.8rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    animation: fadeSlide 1s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.2rem;
+    animation: fadeSlide 1s ease both;
+    animation-delay: 0.45s;
+  }
+
+  .btn-primary {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    padding: 1rem 2.2rem;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-neon));
+    color: #000;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0,229,255,0.5);
+  }
+
+  .btn-outline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    padding: 1rem 2.2rem;
+    background: transparent;
+    color: var(--blue-ice);
+    border: 1px solid var(--blue-glow);
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(13,110,253,0.15);
+    box-shadow: 0 0 20px rgba(13,110,253,0.3);
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(29, 142, 255, 0.2);
+    border-bottom: 1px solid rgba(29, 142, 255, 0.2);
+    background: rgba(5, 15, 31, 0.8);
+  }
+
+  .stat-item {
+    padding: 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(29, 142, 255, 0.2);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--blue-neon);
+    text-shadow: 0 0 20px rgba(0,229,255,0.4);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+  }
+
+  .section-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--blue-neon);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    color: var(--text-white);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .section-title span { color: var(--blue-neon); }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ─── WORKOUT CARDS ─── */
+  .workout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .workout-card {
+    background: linear-gradient(145deg, rgba(10,31,61,0.9), rgba(5,15,31,0.95));
+    border: 1px solid rgba(29, 142, 255, 0.2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+
+  .workout-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue-neon), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .workout-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,229,255,0.4);
+    box-shadow: 0 8px 40px rgba(0,229,255,0.1);
+  }
+
+  .workout-card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-neon);
+    margin-bottom: 0.4rem;
+  }
+
+  .card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 1rem;
+  }
+
+  .exercise-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exercise-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(29, 142, 255, 0.1);
+  }
+
+  .exercise-list li:last-child { border-bottom: none; }
+
+  .ex-detail {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    color: var(--blue-ice);
+    letter-spacing: 1px;
+  }
+
+  .card-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.25);
+    color: var(--blue-ice);
+    border-radius: 2px;
+  }
+
+  .badge.gold {
+    background: rgba(245,166,35,0.1);
+    border-color: rgba(245,166,35,0.3);
+    color: var(--accent-gold);
+  }
+
+  /* ─── NUTRITION ─── */
+  .nutrition-section { background: rgba(5, 15, 31, 0.5); }
+
+  .nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .nutrition-card {
+    background: rgba(10,31,61,0.7);
+    border: 1px solid rgba(29, 142, 255, 0.15);
+    padding: 1.5rem;
+    border-radius: 2px;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+
+  .nutrition-card:hover { border-color: rgba(0,229,255,0.35); }
+
+  .nut-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--blue-neon);
+  }
+
+  .nut-unit {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .nut-label {
+    font-size: 0.82rem;
+    color: var(--text-main);
+    margin-top: 0.4rem;
+  }
+
+  .nut-desc {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+    line-height: 1.5;
+  }
+
+  /* ─── RECOVERY ─── */
+  .recovery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .recovery-card {
+    background: rgba(10,31,61,0.6);
+    border-left: 3px solid var(--blue-bright);
+    padding: 1.5rem 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .recovery-card:hover { border-left-color: var(--blue-neon); }
+
+  .recovery-card h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-white);
+    margin-bottom: 0.6rem;
+  }
+
+  .recovery-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* ─── WEEKLY PLAN ─── */
+  .week-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .week-table th {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-neon);
+    padding: 1rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(29,142,255,0.25);
+  }
+
+  .week-table td {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid rgba(29,142,255,0.08);
+    color: var(--text-main);
+    vertical-align: top;
+  }
+
+  .week-table tr:hover td { background: rgba(13,110,253,0.06); }
+
+  .day-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-white);
+    font-weight: 700;
+  }
+
+  .focus-tag {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 1.5px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+  }
+
+  .focus-strength { background: rgba(13,110,253,0.2); color: var(--blue-ice); }
+  .focus-cardio { background: rgba(0,229,255,0.12); color: var(--blue-neon); }
+  .focus-rest { background: rgba(245,166,35,0.12); color: var(--accent-gold); }
+  .focus-full { background: rgba(79,195,247,0.12); color: #81d4fa; }
+
+  /* ─── ABOUT ─── */
+  .about-section {
+    background: linear-gradient(180deg, rgba(5,15,31,0.3) 0%, rgba(10,31,61,0.4) 100%);
+    border-top: 1px solid rgba(29, 142, 255, 0.15);
+    border-bottom: 1px solid rgba(29, 142, 255, 0.15);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .avatar-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(0,229,255,0.15), rgba(13,110,253,0.1), rgba(5,15,31,0.8));
+    border: 2px solid rgba(0,229,255,0.3);
+    box-shadow: 0 0 60px rgba(0,229,255,0.12), inset 0 0 60px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+    animation: pulse 5s ease-in-out infinite;
+    position: relative;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,229,255,0.2);
+    animation: spin 20s linear infinite;
+  }
+
+  .avatar-ring2 {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    border: 1px solid rgba(13,110,253,0.12);
+    animation: spin 30s linear infinite reverse;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .about-content .name-heading {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: 0.3rem;
+  }
+
+  .about-content .name-heading span { color: var(--blue-neon); }
+
+  .about-role {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .about-bio {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  .about-bio strong { color: var(--text-main); font-weight: 600; }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(29,142,255,0.3);
+    color: var(--blue-ice);
+    background: rgba(13,110,253,0.08);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    text-transform: uppercase;
+  }
+
+  .about-tag.gold {
+    border-color: rgba(245,166,35,0.35);
+    color: var(--accent-gold);
+    background: rgba(245,166,35,0.07);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+  }
+
+  .value-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue-neon);
+    box-shadow: 0 0 8px var(--blue-neon);
+    flex-shrink: 0;
+    margin-top: 0.4rem;
+  }
+
+  .value-text {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 4rem;
+    border-top: 1px solid rgba(29, 142, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--blue-neon);
+    letter-spacing: 3px;
+  }
+
+  .footer-logo span { color: var(--accent-gold); }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+
+  .footer-mission {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+    max-width: 280px;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+    margin: 0 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.2rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .avatar-frame { width: 200px; height: 200px; font-size: 5rem; }
+    .avatar-ring { width: 240px; height: 240px; }
+    .avatar-ring2 { width: 280px; height: 280px; }
+    .values-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-mission { text-align: center; }
+    .divider { margin: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="logo">FIT<span>CORE</span></div>
+  <ul>
+    <li><a href="#workouts">Training</a></li>
+    <li><a href="#nutrition">Nutrition</a></li>
+    <li><a href="#recovery">Recovery</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <p class="hero-tag">// System Online — Your Transformation Begins</p>
+  <h1>Train Hard.<br><span class="hl">Grow Bold.</span><br>Inspire <span class="hl2">All.</span></h1>
+  <p class="hero-sub">A science-backed fitness system built with discipline, diversity, and dedication. Every rep, every meal, every rest day — engineered to get you there.</p>
+  <div class="hero-cta">
+    <a href="#workouts" class="btn-primary">Start Training</a>
+    <a href="#about" class="btn-outline">Meet the Mind</a>
+  </div>
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Workout Plans</div></div>
+  <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Muscle Groups</div></div>
+  <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Days Programmed</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Commitment Required</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── WORKOUTS ─── -->
+<section id="workouts">
+  <p class="section-tag">// Training Protocols</p>
+  <h2 class="section-title">Choose Your <span>Mission</span></h2>
+  <p class="section-desc">Three complete programs built for different goals. Each includes exercises, sets, reps, and progressions — everything you need to execute.</p>
+
+  <div class="workout-grid">
+
+    <!-- STRENGTH -->
+    <div class="workout-card">
+      <div class="card-icon">⚡</div>
+      <div class="card-label">Protocol 01</div>
+      <div class="card-title">STRENGTH BUILDER</div>
+      <ul class="exercise-list">
+        <li>Barbell Back Squat <span class="ex-detail">4×6 reps</span></li>
+        <li>Bench Press <span class="ex-detail">4×6 reps</span></li>
+        <li>Deadlift <span class="ex-detail">3×5 reps</span></li>
+        <li>Overhead Press <span class="ex-detail">3×6 reps</span></li>
+        <li>Barbell Row <span class="ex-detail">4×6 reps</span></li>
+        <li>Pull-Ups <span class="ex-detail">3×max</span></li>
+        <li>Farmer's Carry <span class="ex-detail">3×30 sec</span></li>
+      </ul>
+      <div class="card-footer">
+        <span class="badge">3 Days/Week</span>
+        <span class="badge gold">Progressive Overload</span>
+      </div>
+    </div>
+
+    <!-- CARDIO + FAT LOSS -->
+    <div class="workout-card">
+      <div class="card-icon">🔥</div>
+      <div class="card-label">Protocol 02</div>
+      <div class="card-title">CARDIO + FAT LOSS</div>
+      <ul class="exercise-list">
+        <li>Jump Rope Warmup <span class="ex-detail">5 min</span></li>
+        <li>Sprint Intervals <span class="ex-detail">8×30 sec</span></li>
+        <li>Burpees <span class="ex-detail">4×15 reps</span></li>
+        <li>Mountain Climbers <span class="ex-detail">3×40 sec</span></li>
+        <li>Box Jumps <span class="ex-detail">4×10 reps</span></li>
+        <li>Kettlebell Swings <span class="ex-detail">4×20 reps</span></li>
+        <li>Cool-Down Walk <span class="ex-detail">10 min</span></li>
+      </ul>
+      <div class="card-footer">
+        <span class="badge">4 Days/Week</span>
+        <span class="badge gold">HIIT Method</span>
+      </div>
+    </div>
+
+    <!-- FULL BODY FUNCTIONAL -->
+    <div class="workout-card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-label">Protocol 03</div>
+      <div class="card-title">FULL BODY FUNCTIONAL</div>
+      <ul class="exercise-list">
+        <li>Goblet Squat <span class="ex-detail">3×12 reps</span></li>
+        <li>Push-Ups (Weighted) <span class="ex-detail">3×15 reps</span></li>
+        <li>TRX Row <span class="ex-detail">3×12 reps</span></li>
+        <li>Reverse Lunge <span class="ex-detail">3×10/leg</span></li>
+        <li>Plank Hold <span class="ex-detail">3×1 min</span></li>
+        <li>Hip Thrusts <span class="ex-detail">4×12 reps</span></li>
+        <li>Band Pull-Apart <span class="ex-detail">3×20 reps</span></li>
+      </ul>
+      <div class="card-footer">
+        <span class="badge">5 Days/Week</span>
+        <span class="badge gold">Beginner-Friendly</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WEEKLY SCHEDULE ─── -->
+<section id="schedule">
+  <p class="section-tag">// Weekly Blueprint</p>
+  <h2 class="section-title">7-Day <span>Game Plan</span></h2>
+  <p class="section-desc">A structured weekly template for the Full Body Functional protocol. Discipline lives in the schedule.</p>
+
+  <table class="week-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Focus</th>
+        <th>Key Exercises</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="day-name">MON</span> <span class="focus-tag focus-strength">STRENGTH</span></td>
+        <td>Upper Body Push</td>
+        <td>Bench Press, OHP, Tricep Dips, Push-Ups</td>
+        <td>50–60 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">TUE</span> <span class="focus-tag focus-cardio">CARDIO</span></td>
+        <td>Conditioning</td>
+        <td>Sprint Intervals, Jump Rope, Burpees</td>
+        <td>35–45 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">WED</span> <span class="focus-tag focus-strength">STRENGTH</span></td>
+        <td>Lower Body</td>
+        <td>Squats, Deadlifts, Lunges, Hip Thrusts</td>
+        <td>55–65 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">THU</span> <span class="focus-tag focus-rest">ACTIVE REST</span></td>
+        <td>Mobility + Stretch</td>
+        <td>Yoga flow, Foam roll, Light walk (30 min)</td>
+        <td>30–40 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">FRI</span> <span class="focus-tag focus-strength">STRENGTH</span></td>
+        <td>Upper Body Pull</td>
+        <td>Pull-Ups, Rows, Curls, Face Pulls</td>
+        <td>50–60 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">SAT</span> <span class="focus-tag focus-full">FULL BODY</span></td>
+        <td>Power + Endurance</td>
+        <td>Circuit: Kettlebells, Box Jumps, Planks</td>
+        <td>45–55 min</td>
+      </tr>
+      <tr>
+        <td><span class="day-name">SUN</span> <span class="focus-tag focus-rest">REST</span></td>
+        <td>Full Recovery</td>
+        <td>Sleep 8–9hrs, light walk optional</td>
+        <td>Rest Day</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── NUTRITION ─── -->
+<section id="nutrition" class="nutrition-section">
+  <p class="section-tag">// Fuel Protocol</p>
+  <h2 class="section-title">Nutrition <span>Fundamentals</span></h2>
+  <p class="section-desc">No crash diets. Just science. Build your plate around these pillars and watch your body transform.</p>
+
+  <div class="nutrition-grid">
+    <div class="nutrition-card">
+      <div class="nut-num">0.8–1g</div>
+      <div class="nut-unit">per lb of bodyweight</div>
+      <div class="nut-label">Protein Daily</div>
+      <div class="nut-desc">Chicken, eggs, fish, legumes, Greek yogurt, tofu. Repair and grow muscle tissue.</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nut-num">40–50%</div>
+      <div class="nut-unit">of total calories</div>
+      <div class="nut-label">Complex Carbs</div>
+      <div class="nut-desc">Oats, rice, sweet potatoes, whole grains. Your primary energy source — don't fear carbs.</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nut-num">25–35%</div>
+      <div class="nut-unit">of total calories</div>
+      <div class="nut-label">Healthy Fats</div>
+      <div class="nut-desc">Avocado, olive oil, nuts, salmon. Hormonal health and joint protection.</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nut-num">3–4L</div>
+      <div class="nut-unit">per day</div>
+      <div class="nut-label">Water Intake</div>
+      <div class="nut-desc">Hydration fuels every cell. Add electrolytes on heavy training days.</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nut-num">30–60</div>
+      <div class="nut-unit">min post-workout</div>
+      <div class="nut-label">Anabolic Window</div>
+      <div class="nut-desc">Consume protein + carbs soon after training. Maximize muscle recovery and synthesis.</div>
+    </div>
+    <div class="nutrition-card">
+      <div class="nut-num">5–7</div>
+      <div class="nut-unit">small meals/day</div>
+      <div class="nut-label">Meal Frequency</div>
+      <div class="nut-desc">Keep metabolism active. Balance caloric intake across evenly spaced meals.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── RECOVERY ─── -->
+<section id="recovery">
+  <p class="section-tag">// Recovery Intel</p>
+  <h2 class="section-title">Recover Like <span>a Pro</span></h2>
+  <p class="section-desc">The gains happen during recovery, not the workout. These aren't optional extras — they're part of the program.</p>
+
+  <div class="recovery-grid">
+    <div class="recovery-card">
+      <h4>😴 Sleep 8–9 Hours</h4>
+      <p>Growth hormone peaks during deep sleep. Prioritize sleep hygiene — same bedtime, dark room, no screens 30 min before bed.</p>
+    </div>
+    <div class="recovery-card">
+      <h4>🧊 Cold Therapy</h4>
+      <p>Cold showers or ice baths post-workout reduce inflammation, boost dopamine, and accelerate muscle recovery. 2–5 min.</p>
+    </div>
+    <div class="recovery-card">
+      <h4>🧘 Active Mobility</h4>
+      <p>Daily 10–15 min of stretching, yoga, or foam rolling prevents injury and keeps the body supple and ready to perform.</p>
+    </div>
+    <div class="recovery-card">
+      <h4>💊 Key Supplements</h4>
+      <p>Creatine (5g/day), Vitamin D3, Magnesium, Omega-3s, and Protein powder. Supplements assist — they don't replace food.</p>
+    </div>
+    <div class="recovery-card">
+      <h4>📵 Mental Recovery</h4>
+      <p>Stress is the enemy of gains. Meditate, journal, or decompress daily. Mental fitness is part of a disciplined lifestyle.</p>
+    </div>
+    <div class="recovery-card">
+      <h4>📈 Track & Adjust</h4>
+      <p>Log workouts, meals, and sleep weekly. What gets measured gets improved. Data is your best training partner.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about" class="about-section">
+  <div class="about-inner">
+
+    <div class="about-visual">
+      <div class="avatar-ring2"></div>
+      <div class="avatar-ring"></div>
+      <div class="avatar-frame">🧬</div>
+    </div>
+
+    <div class="about-content">
+      <p class="section-tag">// Creator Profile</p>
+      <h2 class="name-heading">The Mind Behind <span>FitCore</span></h2>
+      <p class="about-role">Health Science Student · Saint Joseph's University · Philadelphia, PA</p>
+
+      <p class="about-bio">
+        I'm a <strong>Health Science student at Saint Joseph's University</strong>, rooted in <strong>Upper Darby, PA</strong> — a community that shaped my understanding of resilience, work ethic, and the power of representation. My dad is from <strong>Ghana</strong>, my mom from <strong>Liberia</strong> — two proud West African nations whose cultures of strength and community run through everything I do.<br><br>
+        FitCore isn't just a fitness site. It's a mission. I created it because I believe <strong>health is a right, not a privilege</strong> — and that too many people don't see themselves represented in wellness spaces. I'm here to change that. Whether you're a first-generation student trying to balance nutrition and classes, or anyone who's been told the gym isn't for them — this is built for you.<br><br>
+        I'm driven by a simple belief: <strong>discipline is the bridge between your goals and your results.</strong> And I want to walk that bridge with as many people as possible.
+      </p>
+
+      <div class="about-tags">
+        <span class="about-tag">Health Science</span>
+        <span class="about-tag">West African Heritage</span>
+        <span class="about-tag">Upper Darby, PA</span>
+        <span class="about-tag gold">Diversity Advocate</span>
+        <span class="about-tag gold">Saint Joseph's University</span>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div class="value-text"><strong style="color:var(--text-white)">Promote Diversity</strong><br>Every body, every background belongs in fitness.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div class="value-text"><strong style="color:var(--text-white)">Disciplined Living</strong><br>Consistency over motivation, every single day.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div class="value-text"><strong style="color:var(--text-white)">Science-Backed</strong><br>Health decisions grounded in real knowledge.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div class="value-text"><strong style="color:var(--text-white)">Empower Others</strong><br>Help as many people reach their goals as possible.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">FIT<span>CORE</span></div>
+  <div class="footer-copy">© 2026 FitCore · Built with Discipline &amp; Purpose</div>
+  <div class="footer-mission">"Striving to help many achieve their goals — one rep, one meal, one mindset at a time."</div>
+</footer>
+
+</body>
+</html>
